@@ -1,0 +1,10 @@
+.Header_root {
+  height: 60px;
+  background-color: #131921;
+  border: 1px solid black;
+}
+
+.Header_image {
+  height: 35px;
+  margin: 20px;
+}

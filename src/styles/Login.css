@@ -1,0 +1,49 @@
+.Login_root {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.Login_form {
+  width: 90%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.Login_item {
+  width: 250px;
+  height: 35px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.Login_primary {
+  background: linear-gradient(white, #eeba34);
+}
+
+.Login_primary:hover {
+  background: #eeba34;
+}
+
+.Login_secondary {
+  background: linear-gradient(white, #edeaea);
+}
+
+.Login_secondary:hover {
+  background: #edeaea;
+}
+
+.Login_image {
+  height: 80px;
+  object-fit: contain;
+}
