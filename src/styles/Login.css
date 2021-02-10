@@ -28,19 +28,19 @@
 }
 
 .Login_primary {
-  background: linear-gradient(white, #eeba34);
+  background: linear-gradient(white, rgb(255, 196, 0));
 }
 
 .Login_primary:hover {
-  background: #eeba34;
+  background: rgb(255, 226, 128);
 }
 
 .Login_secondary {
-  background: linear-gradient(white, #edeaea);
+  background: linear-gradient(white, rgb(194, 194, 194));
 }
 
 .Login_secondary:hover {
-  background: #edeaea;
+  background: rgb(225, 225, 225);
 }
 
 .Login_image {

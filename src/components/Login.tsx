@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import logo from "./logo2.jpg";
-
 interface State {
   switched: boolean;
   disabled: boolean;
-  classes: {
-    loginButton: string,
-    createNewButton: string,
-  }
 }
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
-
 export default class Login extends Component {
 
   private static username: string | undefined;
@@ -24,10 +17,6 @@ export default class Login extends Component {
   state: State = {
     switched: false,
     disabled: true,
-    classes: {
-      loginButton: "Login_item Login_primary",
-      createNewButton: "Login_item Login_secondary"
-    }
   };
 
   render = (): JSX.Element => {
@@ -62,7 +51,7 @@ export default class Login extends Component {
 
   handleLogin = (): void => {
     this.setState({
-      switched: this.state.switched ? false : this.state.switched
+      switched: this.state.switched ? false : this.state.switched,
     })
     if (Login.email && Login.password) {
       console.log(`user loged`)
@@ -75,7 +64,7 @@ export default class Login extends Component {
 
   handleCreateNewAccount = (): void => {
     this.setState({
-      switched: !this.state.switched ? true : this.state.switched
+      switched: !this.state.switched ? true : this.state.switched,
     })
     this.validate();
   };
@@ -154,14 +143,14 @@ export default class Login extends Component {
 
   loginButton: JSX.Element = (
     <button
-      className={this.state.classes.loginButton}
+      className="Login_item Login_secondary"
       onClick={this.handleLogin}>
       Login
     </button>
   );
 
   createNewButton: JSX.Element = (
-    <button className={this.state.classes.createNewButton} onClick={this.handleCreateNewAccount}>
+    <button className="Login_item Login_primary" onClick={this.handleCreateNewAccount}>
       Create New Account
     </button>
   );
@@ -184,11 +173,11 @@ export default class Login extends Component {
     return Login.email;
   }
 
-  resetPassword = (currentPassword: string, newPassword: string): string | undefined => {
+  resetPassword = (currentPassword: string, newPassword: string): boolean => {
     if (currentPassword === Login.password) {
       Login.password = newPassword;
-      return Login.password;
+      return true;
     }
-    return undefined;
+    return false;
   }
 }
