@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import logo from "./logo2.jpg";
+
 interface State {
   switched: boolean;
   disabled: boolean;
 }
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
 export default class Login extends Component {
 
   private static username: string | undefined;
@@ -79,10 +81,8 @@ export default class Login extends Component {
       console.log(`new account created`);
       console.log(Login.password, Login.email, Login.password);
       return
-
     }
     console.log("invalid details. new account was not created");
-
   }
 
   handleDisabled = (): void => {
