@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 3000;
+const port = 5000;
 
 app.use(bodyParser.json());
 app.use("/api/users", require("./routes/user"));
