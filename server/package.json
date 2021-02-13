@@ -1,0 +1,20 @@
+{
+  "name": "amazon-clone-server",
+  "version": "1.0.0",
+  "description": "backend server for the react app amazon clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js "
+  },
+  "author": "Sanuja Methmal",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.1"
+  }
+}
