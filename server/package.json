@@ -2,15 +2,18 @@
   "name": "amazon-clone-server",
   "version": "1.0.0",
   "description": "backend server for the react app amazon clone",
-  "main": "server.js",
+  "main": "src/server.ts",
   "scripts": {
+    "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "start": "node server.js "
+    "dev": "concurrently \"nodemon src/server.ts\" \"npm run tsc\"",
+    "start": "node build/server.js "
   },
   "author": "Sanuja Methmal",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.27",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "ES3",
+    "watch": true,
+    "lib": ["ES2017", "DOM"]
+  },
+  "include": ["./src/*/*"],
+  "exclude": ["./build/*","./node_modules"]
+}

@@ -1,8 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const users = require("../config/database").users;
 const validators = require("../utils/validators");
 
+let users = [
+  {
+    id: 1,
+    name: `sanuja`,
+    address: `kalaeliya`,
+  },
+  {
+    id: 2,
+    name: `amal`,
+    address: `wattala`,
+  },
+  {
+    id: 3,
+    name: `kamal`,
+    address: `nigambo`,
+  },
+];
 router.get(`/`, (req, res) => {
   function getAllUsers() {
     res.send(users);

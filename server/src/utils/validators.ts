@@ -4,7 +4,7 @@ function isValidUser(req) {
     address: Boolean(req.body.address),
   };
 
-  for (key in schema) {
+  for (let key in schema) {
     let isValid = schema[key];
     if (!isValid) return false;
   }
