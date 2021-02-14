@@ -1,7 +1,5 @@
 import express = require("express");
 const router = express.Router();
-const validators = require("../utils/validators");
-
 interface User {
   id: number;
   name: string;
@@ -68,12 +66,13 @@ router.patch(`/:id`, (req: express.Request, res: express.Response): void => {
 
 router.post(`/`, (req: express.Request, res: express.Response): void => {
   function addUser(user: User): void {
-    if (!validators.isValidUser(req)) {
-      res.send(`invalid details`);
+    if (user.name && user.address) {
+      users.push(user);
+      res.send(user);
       return;
     }
-    users.push(user);
-    res.send(user);
+    res.send("Cannot add user. User is invalid");
+    return;
   }
 
   const newUser: User = {
