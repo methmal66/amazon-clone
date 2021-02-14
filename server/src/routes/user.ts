@@ -1,8 +1,14 @@
-const express = require("express");
+import express = require("express");
 const router = express.Router();
 const validators = require("../utils/validators");
 
-let users = [
+interface User {
+  id: number;
+  name: string;
+  address: string;
+}
+
+let users: Array<User> = [
   {
     id: 1,
     name: `sanuja`,
@@ -19,76 +25,93 @@ let users = [
     address: `nigambo`,
   },
 ];
-router.get(`/`, (req, res) => {
-  function getAllUsers() {
+
+router.get(`/`, (res: express.Response): void => {
+  function getAllUsers(): void {
     res.send(users);
   }
 
   getAllUsers();
 });
 
-router.get(`/:id`, (req, res) => {
-  function getUser(id) {
-    const selectedUser = users.filter((user) => user.id == id)[0];
+router.get(`/:id`, (req: express.Request, res: express.Response): void => {
+  function getUser(id: number): void {
+    const selectedUser: User = users.filter((user) => user.id == id)[0];
     res.send(selectedUser);
   }
 
-  getUser(req.params.id);
+  getUser(parseInt(req.params.id));
 });
 
-router.patch(`/:id`, (req, res) => {
-  function updateUser(id, name, address) {
-    const existUser = users.find((user) => user.id == id);
+router.patch(`/:id`, (req: express.Request, res: express.Response): void => {
+  function updateUser(user: User): void {
+    const existUser: User | undefined = users.find(
+      (eachUser) => eachUser.id == user.id
+    );
     if (!existUser) {
       res.status(400).send(`user is not exist`);
       return;
     }
-    existUser.name = name;
-    existUser.address = address;
+    existUser.name = user.name;
+    existUser.address = user.address;
     res.send(existUser);
   }
 
-  updateUser(req.params.id, req.body.name, req.body.address);
+  const idOfUpdatingUser: number = parseInt(req.params.id);
+  const newUser: User = {
+    id: idOfUpdatingUser,
+    name: req.body.name,
+    address: req.body.address,
+  };
+  updateUser(newUser);
 });
 
-router.post(`/`, (req, res) => {
-  function addUser(name, address) {
+router.post(`/`, (req: express.Request, res: express.Response): void => {
+  function addUser(user: User): void {
     if (!validators.isValidUser(req)) {
       res.send(`invalid details`);
       return;
     }
-    const user = {
-      id: users.length + 1,
-      name,
-      address,
-    };
     users.push(user);
     res.send(user);
   }
 
-  addUser(req.body.name, req.body.address);
+  const newUser: User = {
+    id: users.length + 1,
+    name: req.body.name,
+    address: req.body.address,
+  };
+  addUser(newUser);
 });
 
-router.delete(`/:id`, (req, res) => {
-  function deleteUser(id) {
-    let newUsers = [];
-    let userToDelete;
+router.delete(`/:id`, (req: express.Request, res: express.Response): void => {
+  function deleteUser(id: number): void {
+    let newUsers: Array<User> = [];
+    let userToDelete: User | undefined;
     users.forEach((user) => {
-      if (user.id != id) newUsers.push(user);
-      else userToDelete = user;
+      if (user.id != id) {
+        newUsers.push(user);
+        return;
+      }
+      userToDelete = user;
     });
     users = newUsers;
     res.send(userToDelete);
   }
 
-  deleteUser(req.params.id);
+  const idOfDeletingUser: number = parseInt(req.params.id);
+  deleteUser(idOfDeletingUser);
 });
 
-router.delete(`/`, (req, res) => {
-  function deleteLastUser() {
-    const lastUser = users[users.length - 1];
-    res.send(lastUser);
-    users.pop();
+router.delete(`/`, (req: express.Request, res: express.Response): void => {
+  function deleteLastUser(): void {
+    if (users.length !== 0) {
+      const lastUser = users[users.length - 1];
+      res.send(lastUser);
+      users.pop();
+      return;
+    }
+    res.send(`Cannot delete user. There are no user left to delete`);
   }
 
   deleteLastUser();

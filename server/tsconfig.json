@@ -3,7 +3,9 @@
     "outDir": "build",
     "target": "ES3",
     "watch": true,
-    "lib": ["ES2017", "DOM"]
+    "lib": ["ES2017", "DOM"],
+    "types": [ "node" ],
+"typeRoots": [ "../node_modules/@types" ]
   },
   "include": ["./src/*/*"],
   "exclude": ["./build/*","./node_modules"]
