@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"nodemon src/server.ts\" \"npm run tsc\"",
+    "dev": "concurrently \"npm run tsc\" \"nodemon build/server.js\"",
     "start": "node build/server.js "
   },
   "author": "Sanuja Methmal",

@@ -24,7 +24,7 @@ let users: Array<User> = [
   },
 ];
 
-router.get(`/`, (res: express.Response): void => {
+router.get(`/`, (req: express.Request, res: express.Response): void => {
   function getAllUsers(): void {
     res.send(users);
   }
