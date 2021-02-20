@@ -2,25 +2,21 @@
 exports.__esModule = true;
 var express = require("express");
 var router = express.Router();
-var validators = require("../utils/validators");
 var users = [
     {
-        id: 1,
         name: "sanuja",
         address: "kalaeliya"
     },
     {
-        id: 2,
         name: "amal",
         address: "wattala"
     },
     {
-        id: 3,
         name: "kamal",
         address: "nigambo"
     },
 ];
-router.get("/", function (res) {
+router.get("/", function (req, res) {
     function getAllUsers() {
         res.send(users);
     }
@@ -28,62 +24,42 @@ router.get("/", function (res) {
 });
 router.get("/:id", function (req, res) {
     function getUser(id) {
-        var selectedUser = users.filter(function (user) { return user.id == id; })[0];
+        var selectedUser = users[id];
         res.send(selectedUser);
     }
     getUser(parseInt(req.params.id));
 });
 router.patch("/:id", function (req, res) {
-    function updateUser(user) {
-        var existUser = users.find(function (eachUser) { return eachUser.id == user.id; });
-        if (!existUser) {
+    function updateUser(id, user) {
+        if (users.length <= id) {
             res.status(400).send("user is not exist");
             return;
         }
-        existUser.name = user.name;
-        existUser.address = user.address;
-        res.send(existUser);
+        res.send(user);
     }
     var idOfUpdatingUser = parseInt(req.params.id);
     var newUser = {
-        id: idOfUpdatingUser,
         name: req.body.name,
         address: req.body.address
     };
-    updateUser(newUser);
+    updateUser(idOfUpdatingUser, newUser);
 });
 router.post("/", function (req, res) {
-    function addUser(user) {
-        if (!validators.isValidUser(req)) {
-            res.send("invalid details");
+    function addUser(name, address) {
+        if (name && address) {
+            var user = {
+                name: name,
+                address: address
+            };
+            users.push(user);
+            res.send(user);
             return;
         }
-        users.push(user);
-        res.send(user);
+        res.send("Cannot add user. User is invalid");
+        return;
     }
-    var newUser = {
-        id: users.length + 1,
-        name: req.body.name,
-        address: req.body.address
-    };
-    addUser(newUser);
-});
-router["delete"]("/:id", function (req, res) {
-    function deleteUser(id) {
-        var newUsers = [];
-        var userToDelete;
-        users.forEach(function (user) {
-            if (user.id != id) {
-                newUsers.push(user);
-                return;
-            }
-            userToDelete = user;
-        });
-        users = newUsers;
-        res.send(userToDelete);
-    }
-    var idOfDeletingUser = parseInt(req.params.id);
-    deleteUser(idOfDeletingUser);
+    var _a = req.body, name = _a.name, address = _a.address;
+    addUser(name, address);
 });
 router["delete"]("/", function (req, res) {
     function deleteLastUser() {
